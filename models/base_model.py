@@ -5,6 +5,7 @@ les attributs et les methodes"""
 
 import uuid
 from datetime import datetime
+import models
 
 class BaseModel:
 
@@ -35,6 +36,9 @@ class BaseModel:
 
                 """Permet d'attribut la date et l'heure quand une instance"""
                 self.updated_at = self.created_at
+
+                """ajoute metode self(new) sur storage"""
+                models.storage.new(self)
         
     def __str__(self):
         """Methode special qui return la chaine suivante"""
@@ -43,6 +47,8 @@ class BaseModel:
     def save(self):
         """A chaque fois qu'il y aura une modification, l'attribut sera mise à jour"""
         self.updated_at = datetime.now()
+        """appeler metode pour storage"""
+        models.storage.save()
         
     def to_dict(self):
         """On va return un dictionner avec les noms (clées) et les valeur d'un attributs"""
