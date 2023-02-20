@@ -1,9 +1,13 @@
 #!/usr/bin/python3
+"""CONSOLE DE LA CONSOLE AIRBNB"""
 
 
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
+    """class HBNBCommand qui herite cmd.Cmd"""
+
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
