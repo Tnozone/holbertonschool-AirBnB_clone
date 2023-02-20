@@ -31,10 +31,10 @@ class BaseModel:
         my_dict['created_at'] = self.created_at.isoformat()
         my_dict['updated_at'] = self.updated_at.isoformat()
         return my_dict
-
+    
     def save(self):
         self.updated_at = datetime.now()
         data = self.to_dict()
-        with open('{}.json'.format(self.id), 'w') as f:
+        filename = "{}.json".format(datetime.now().strftime("%Y%m%d%H%M%S%f"))
+        with open(filename, 'w') as f:
             json.dump(data, f)
-  
