@@ -14,7 +14,7 @@ class BaseModel:
             """Dans la méthode __init__(), on vérifie si l'argument kwargs est présent, ce qui
               indique que l'objet doit être créé à partir d'un dictionnaire. Si kwargs n'est pas vide, 
               on parcour chaque paire clé-valeur dans le dictionnaire. Si la clé est created_at 
-              ou updated_at, vous convertissez la valeur de la chaîne de caractères en objet datetime. 
+              ou updated_at, on converti la valeur de la chaîne de caractères en objet datetime. 
               Ensuite, vous utilisez la méthode setattr() pour définir l'attribut de l'objet correspondant 
               à la clé avec la valeur."""
             if kwargs:
@@ -33,7 +33,7 @@ class BaseModel:
                 """attribuer la date et l'heure a la création de instance class BaseModel"""
                 self.created_at = datetime.now()
 
-                """Permet d'attribut la date et l'heure quand une instance"""
+                """Permet d'attribut la date et l'heure quand une instance et mofifier"""
                 self.updated_at = self.created_at
         
     def __str__(self):
@@ -45,7 +45,7 @@ class BaseModel:
         self.updated_at = datetime.now()
         
     def to_dict(self):
-        """On va return un dictionner avec les noms (clées) et les valeur d'un attributs"""
+        """On va return un dictionner avec les noms (clées) et les valeur des attributs"""
         dict_copy = self.__dict__.copy()
         dict_copy['__class__'] = self.__class__.__name__
         dict_copy['created_at'] = self.created_at.isoformat()
