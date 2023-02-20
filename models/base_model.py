@@ -33,6 +33,8 @@ class BaseModel:
         return my_dict
 
     def save(self):
-        """A chaque fois qu'il y aura une modification, l'attribut sera mise à jour"""
         self.updated_at = datetime.now()
+        data = self.to_dict()
+        with open('{}.json'.format(self.id), 'w') as f:
+            json.dump(data, f)
   
