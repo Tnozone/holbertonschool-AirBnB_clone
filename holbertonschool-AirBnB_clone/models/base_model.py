@@ -5,6 +5,7 @@ les attributs et les methodes"""
 
 import uuid
 from datetime import datetime
+import json
 
 
 class BaseModel:
@@ -19,10 +20,6 @@ class BaseModel:
         """Permet d'attribut la date et l'heure quand une instance"""
         self.updated_at = datetime.now()
         
-    def save(self):
-        """A chaque fois qu'il y aura une modification, l'attribut sera mise à jour"""
-        self.updated_at = datetime.now()
-        
     def __str__(self):
         """Methode special qui return la chaine suivante"""
         return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
@@ -34,3 +31,8 @@ class BaseModel:
         my_dict['created_at'] = self.created_at.isoformat()
         my_dict['updated_at'] = self.updated_at.isoformat()
         return my_dict
+
+    def save(self):
+        """A chaque fois qu'il y aura une modification, l'attribut sera mise à jour"""
+        self.updated_at = datetime.now()
+  
