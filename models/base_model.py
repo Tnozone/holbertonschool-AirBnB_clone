@@ -25,7 +25,6 @@ class BaseModel:
                       if key != '__class__':
                            setattr(self, key, value)
             if not kwargs:
-                
                 """id permettra d'avoir un identifiant unique transformer en str a chaque
                 instancation de class BaseModel"""
                 self.id = str(uuid.uuid4())
