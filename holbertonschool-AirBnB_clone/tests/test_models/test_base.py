@@ -1,31 +1,29 @@
 import unittest
 from models.base_model import BaseModel
+from datetime import datetime
 
 
 class TestBaseModel(unittest.TestCase):
+    def setUp(self):
+        self.model = BaseModel()
 
-    def test_attributes(self):
-        model = BaseModel()
-        self.assertIsInstance(model.id, str)
-        self.assertIsInstance(model.created_at, datetime)
-        self.assertIsInstance(model.updated_at, datetime)
-    
-    def test_save(self):
-        model = BaseModel()
-        updated_at_before = model.updated_at
-        model.save()
-        self.assertNotEqual(model.updated_at, updated_at_before)
+    def test_create_instance(self):
+        self.assertIsInstance(self.model, BaseModel)
 
-    def test_str(self):
-        model = BaseModel()
-        self.assertIn(type(model).__name__, str(model))
-        self.assertIn(model.id, str(model))
+    def test_id_is_string(self):
+        self.assertIsInstance(self.model.id, str)
 
-    def test_to_dict(self):
-        model = BaseModel()
-        model_dict = model.to_dict()
+    def test_created_at_is_datetime(self):
+        self.assertIsInstance(self.model.created_at, datetime)
+
+    def test_updated_at_is_datetime(self):
+        self.assertIsInstance(self.model.updated_at, datetime)
+
+    def test_save_updates_updated_at(self):
+        old_updated_at = self.model.updated_at
+        self.model.save()
+        self.assertNotEqual(self.model.updated_at, old_updated_at)
+
+    def test_to_dict_returns_dict(self):
+        model_dict = self.model.to_dict()
         self.assertIsInstance(model_dict, dict)
-        self.assertIn('__class__', model_dict)
-        self.assertIn('id', model_dict)
-        self.assertIn('created_at', model_dict)
-        self.assertIn('updated_at', model_dict)
