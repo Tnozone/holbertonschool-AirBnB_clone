@@ -19,7 +19,7 @@ class TestFileStorage(unittest.TestCase):
         storage = FileStorage()
         self.assertIsInstance(storage, FileStorage)
 
-     def test_file_path(self):
+    def test_file_path(self):
         """Test __file path works"""
         path = FileStorage._FileStorage__file_path
         self.assertEqual(str, type(path))
