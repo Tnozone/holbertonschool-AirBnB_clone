@@ -37,11 +37,5 @@ class TestFileStorage(unittest.TestCase):
         FileStorage.all(None)
         self.assertEqual(os.path.isfile('file.json'), True)
 
-    """
-    def test_save(self):
-        file_storage = FileStorage()
-        file_storage.save()
-    """
-
 if __name__ == "__main__":
     unittest.main()

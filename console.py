@@ -34,7 +34,6 @@ class HBNBCommand(cmd.Cmd):
         elif args in self.tab:
             new_instance = eval(arg + '()')
             new_instance.save()
-
             print(new_instance.id)
     
         else:
@@ -59,12 +58,11 @@ class HBNBCommand(cmd.Cmd):
         
         id = args[1]
         key = "{}.{}".format(class_name, id)
-        obj_dict = models.storage.all()
-        if key not in obj_dict:
+        obj_all = models.storage.all()
+        if key not in obj_all:
             print("** no instance found **")
             return
-
-        print(obj_dict[key])
+        print(obj_all[key])
 
     def do_destroy(self, arg):
         """On va suprimer les instance d'une class et enregister dans le fichier json"""
@@ -85,18 +83,32 @@ class HBNBCommand(cmd.Cmd):
 
         id = args[1]
         key = "{}.{}".format(class_name, id)
-        obj_dict = models.storage.all()
-        if key not in obj_dict:
+        obj_all = models.storage.all()
+        if key not in obj_all:
             print("** no instance found **")
             return
 
-        del obj_dict[key]
+        del obj_all[key]
 
     def do_all(self, arg):
-        """imprimeles représentations sous forme de chaîne de toutes 
-        les instances en fonction ou non du nom de la classe"""
-        pass
+        """Prints all string representation of all instances based or not on the class name
+        Usage: all [Class Name] or all"""
+    
+        args = arg.split()
+        obj_all = models.storage.all()
 
+        # Si aucun argument n'est fourni, on affiche toutes les instances.
+        if not len(args):
+            print([str(obj_all[key]) for key in obj_all])
+        
+        # Si un nom de classe est fourni, on affiche toutes les instances de cette classe.
+        elif args[0] in self.tab:
+            print([str(obj_all[key]) for key in obj_all if key.startswith(args[0] + ".")])
+
+        else:
+            print("** class doesn't exist **")
+
+               
     def do_update(self, arg):
         """met à jour une instance en fonction du nom et de l'identifiant
             en ajoutant ou en mettant à jour l'attribut"""
