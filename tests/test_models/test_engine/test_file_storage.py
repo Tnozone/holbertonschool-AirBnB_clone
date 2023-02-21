@@ -1,31 +1,31 @@
 #!/usr/bin/python3
-"""tests pour FileStorage"""
+"""Unit tests for FileStorage class"""
 
 
 import unittest
 from models.engine.file_storage import FileStorage
-from models.base_model import BaseModel
-from models import storage
 import os
+from models.base_model import BaseModel
+from models import
 
 
 class TestFileStorage(unittest.TestCase):
-    """Unittest por FileStorage"""
+    """Unittests for FileStorage"""
 
     my_model = BaseModel()
 
     def test_instanciates(self):
-        """Test correct FileSotrage instance"""
+        "Tests that FileStorage correctly instanciates"
         storage = FileStorage()
         self.assertIsInstance(storage, FileStorage)
 
-     def test_file_path(self):
-        """Test __file path works"""
+    def test_file_path(self):
+        """Test __file path is exited"""
         path = FileStorage._FileStorage__file_path
         self.assertEqual(str, type(path))
 
     def test_object(self):
-        """Test __object est type dict apres deserialization"""
+        """Test __object is type dict after deserialization object - dict"""
         object_dict = FileStorage._FileStorage__objects
         self.assertEqual(dict, type(object_dict))
 
