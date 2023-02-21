@@ -59,5 +59,14 @@ class TestBaseModel(unittest.TestCase):
     def test_str_includes_id(self):
         self.assertIn(self.model.id, str(self.model))
 
+    def test_save(self):
+        """testing save"""
+        i = self.value()
+        i.save()
+        key = self.name + "." + i.
+        with open('file.json', 'r') as f:
+            j = json.load(f)
+            self.assertEqual(j[key], i.to_dict())
+
 if __name__ == '__main__':
     unittest.main()
