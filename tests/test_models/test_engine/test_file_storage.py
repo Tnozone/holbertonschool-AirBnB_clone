@@ -6,7 +6,9 @@ import unittest
 from models.engine.file_storage import FileStorage
 import os
 from models.base_model import BaseModel
-from models import
+import json
+import models
+from models.user import User
 
 
 class TestFileStorage(unittest.TestCase):
@@ -34,6 +36,10 @@ class TestFileStorage(unittest.TestCase):
         dict_return = {}
         FileStorage.all(None)
         self.assertEqual(os.path.isfile('file.json'), True)
+
+    def test_save(self):
+        file_storage = FileStorage()
+        file_storage.save()
 
 if __name__ == "__main__":
     unittest.main()

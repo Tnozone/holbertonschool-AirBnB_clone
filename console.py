@@ -1,9 +1,7 @@
-#!/usr/bin/python3
-"""CONSOLE DE LA CONSOLE AIRBNB"""
-
-
 import cmd
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+import models
 
 
 class HBNBCommand(cmd.Cmd):
@@ -28,27 +26,71 @@ class HBNBCommand(cmd.Cmd):
         """On va cree une nouvelle instance de class en fonction 
         de l'argument """
 
+        args = arg.split()[0]
+
         if not arg:
             print("** class name missing **")
 
-        elif arg in self.tab:
+        elif args in self.tab:
             new_instance = eval(arg + '()')
             new_instance.save()
+
             print(new_instance.id)
     
         else:
             print("** class doesn't exist **")
 
-    
     def do_show(self, arg):
-        """On va imprimer la representation sous forme de chaine
-        on fonction du nom de l'edantifiant mis dans arg"""
-        pass
+        """On va recuper le dictionnaire d'une id d'une class"""
+        args = arg.split()
+
+        if not arg:
+            print("** class name missing **")
+            return
+        
+        class_name = args[0]
+        if class_name not in self.tab:
+            print("** class doesn't exist **")
+            return
+        
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+        
+        id = args[1]
+        key = "{}.{}".format(class_name, id)
+        obj_dict = models.storage.all()
+        if key not in obj_dict:
+            print("** no instance found **")
+            return
+
+        print(obj_dict[key])
 
     def do_destroy(self, arg):
-        """on va suprimer une instance en fonction du nom et de l'identifiant
-        de la class mis dans arg"""
-        pass
+        """On va suprimer les instance d'une class et enregister dans le fichier json"""
+        args = arg.split()
+
+        if not arg:
+            print("** class name missing **")
+            return
+
+        class_name = args[0]
+        if class_name not in self.tab:
+            print("** class doesn't exist **")
+            return
+
+        if len(args) < 2:
+            print("** instance id missing **")
+            return
+
+        id = args[1]
+        key = "{}.{}".format(class_name, id)
+        obj_dict = models.storage.all()
+        if key not in obj_dict:
+            print("** no instance found **")
+            return
+
+        del obj_dict[key]
 
     def do_all(self, arg):
         """imprimeles représentations sous forme de chaîne de toutes 
@@ -59,8 +101,3 @@ class HBNBCommand(cmd.Cmd):
         """met à jour une instance en fonction du nom et de l'identifiant
             en ajoutant ou en mettant à jour l'attribut"""
         pass
-
-
-
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()
