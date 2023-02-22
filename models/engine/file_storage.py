@@ -58,11 +58,8 @@ class FileStorage:
         """serializes __objects to the JSON"""
         jdict = {}
         for keys, values in FileStorage.__objects.items():
-            # Ajouter une vérification pour déterminer si l'objet est de type User
-            if isinstance(values, User):
-                jdict[keys] = values.to_dict
-            else:
-                jdict[keys] = values.to_dict()
+            jdict[keys] = values.to_dict()
+
         with open(FileStorage.__file_path, 'w') as file:
             json.dump(jdict, file)
 
@@ -75,9 +72,5 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as file:
                 new_object_dict = json.load(file)
             for keys, val in new_object_dict.items():
-                # Ajouter une vérification pour déterminer si l'objet est de type User
-                if val['__class__'] == 'User':
-                    obj = User(**val)
-                else:
-                    obj = eval(val['__class__'])(**val)
+                obj = eval(val['__class__'])(**val)
                 FileStorage.__objects[keys] = obj
