@@ -8,3 +8,10 @@ class TestState(unittest.TestCase):
         self.assertTrue(hasattr(state, "created_at"))
         self.assertTrue(hasattr(state, "updated_at"))
         self.assertTrue(hasattr(state, "name"))
+
+    def test_id(self):
+        hello = State()
+        self.assertEqual(str, type(hello.id))
+
+if __name__ == '__main__':
+    unittest.main()

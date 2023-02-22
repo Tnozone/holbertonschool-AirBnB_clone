@@ -12,5 +12,9 @@ class TestCity(unittest.TestCase):
         self.assertTrue(hasattr(city, 'state_id'))
         self.assertTrue(hasattr(city, 'name'))
 
+    def test_state_id(self):
+        hohio = City()
+        self.assertEqual("", hohio.state_id)
+
 if __name__ == '__main__':
     unittest.main()
