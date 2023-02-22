@@ -94,6 +94,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         del obj_all[key]
+        models.storage.save()
 
     def do_all(self, arg):
         """Prints all string representation of all instances based or not on the class name
