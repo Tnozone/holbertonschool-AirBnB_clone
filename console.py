@@ -148,7 +148,7 @@ class HBNBCommand(cmd.Cmd):
             return
         
         name = args[2]
-        name_value = args[3]
+        name_value = args[3].strip('"')
 
         # Vérification que l'attribut ne peut pas être "id", "created_at" ou "updated_at".
         if name == "id" or name == "created_at" or name == "updated_at":
