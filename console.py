@@ -23,21 +23,26 @@ class HBNBCommand(cmd.Cmd):
     tab = ["BaseModel", "ali"]
 
     def do_create(self, arg):
-        """On va cree une nouvelle instance de class en fonction 
-        de l'argument """
+        """Crée une nouvelle instance de BaseModel et l'enregistre dans le fichier JSON"""
 
-        args = arg.split()[0]
+        # Récupère la liste des mots dans la commande de création
+        args = arg.split()
 
-        if not arg:
+        if not args:
+            # Si la commande est vide, affiche un message d'erreur
             print("** class name missing **")
 
-        elif args in self.tab:
-            new_instance = eval(arg + '()')
-            new_instance.save()
-            print(new_instance.id)
-    
-        else:
+        elif args[0] not in self.tab:
+            # Si la classe n'existe pas, affiche un message d'erreur
             print("** class doesn't exist **")
+
+        else:
+            # Crée une nouvelle instance de la classe spécifiée
+            new_instance = eval(args[0] + '()')
+            new_instance.save()
+
+            # Affiche l'ID de la nouvelle instance
+            print(new_instance.id)
 
     def do_show(self, arg):
         """On va recuper le dictionnaire d'une id d'une class"""
