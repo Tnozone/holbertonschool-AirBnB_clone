@@ -55,6 +55,7 @@ class HBNBCommand(cmd.Cmd):
 
         else:
             # Crée une nouvelle instance de la classe spécifiée
+            # BaseModel()
             new_instance = eval(args[0] + '()')
             new_instance.save()
 

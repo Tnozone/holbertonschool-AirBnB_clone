@@ -84,13 +84,18 @@ class BaseModel:
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
+
         """A chaque fois qu'il y aura une modification, l'attribut sera mise à jour"""
         self.updated_at = datetime.now()
-        """appeler metode pour storage"""
+
+        """appel metode pour storage dans le fichier file_storage.PY
+        pour transformer les valeur en dictionner et les enregistrer dans 
+        un fichier jsopn comme ca on tous les instance de la class"""
         models.storage.save()
 
     def to_dict(self):
-        """On va return un dictionner avec les noms (clées) et les valeur des attributs"""
+        """On va return un dictionner avec les noms (clées) et les valeur des attributs
+        pour que sa soit plus lisible avant de l'enregistrer dans notre fichier json"""
         dict_copy = self.__dict__.copy()
         dict_copy['__class__'] = self.__class__.__name__
         dict_copy['created_at'] = self.created_at.isoformat()
