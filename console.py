@@ -53,13 +53,17 @@ class HBNBCommand(cmd.Cmd):
             # Si la classe n'existe pas, affiche un message d'erreur
             print("** class doesn't exist **")
 
-        else:
-            # Crée une nouvelle instance de la classe spécifiée
-            # BaseModel()
-            if args[0] == "User":
-                new_instance = User()
+        elif args[0] == "User":
+
+            if len(args) < 5:
+                print("** instance attributes missing **")
+            
             else:
-                new_instance = eval(args[0] + '()')
+                new_instance = User(email=args[1], password=args[2], first_name=args[3], last_name=args[4])
+                new_instance.save()
+    
+        else:
+            new_instance = eval(args[0] + '()')
             new_instance.save()
 
             # Affiche l'ID de la nouvelle instance
