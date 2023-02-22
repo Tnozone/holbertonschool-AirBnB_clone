@@ -37,7 +37,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
-    tab = ["BaseModel", "ali"]
+    tab = ["BaseModel", "User"]
 
     def do_create(self, arg):
         """Crée une nouvelle instance de BaseModel et l'enregistre dans le fichier JSON"""
@@ -56,7 +56,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             # Crée une nouvelle instance de la classe spécifiée
             # BaseModel()
-            new_instance = eval(args[0] + '()')
+            if args[0] == "User":
+                new_instance = User()
+            else:
+                new_instance = eval(args[0] + '()')
             new_instance.save()
 
             # Affiche l'ID de la nouvelle instance
