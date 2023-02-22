@@ -12,7 +12,6 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
-
 class FileStorage:
     """class pour file storage"""
 
@@ -59,7 +58,11 @@ class FileStorage:
         """serializes __objects to the JSON"""
         jdict = {}
         for keys, values in FileStorage.__objects.items():
-            jdict[keys] = values.to_dict()
+            # Ajouter une vérification pour déterminer si l'objet est de type User
+            if isinstance(values, User):
+                jdict[keys] = values.to_dict
+            else:
+                jdict[keys] = values.to_dict()
         with open(FileStorage.__file_path, 'w') as file:
             json.dump(jdict, file)
 
@@ -72,4 +75,9 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as file:
                 new_object_dict = json.load(file)
             for keys, val in new_object_dict.items():
-                FileStorage.__objects[keys] = eval(val['__class__'])(**val)
+                # Ajouter une vérification pour déterminer si l'objet est de type User
+                if val['__class__'] == 'User':
+                    obj = User(**val)
+                else:
+                    obj = eval(val['__class__'])(**val)
+                FileStorage.__objects[keys] = obj
