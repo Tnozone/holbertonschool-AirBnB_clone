@@ -8,6 +8,8 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from models.user import User
+import sys
+import models
 
 
 class HBNBCommand(cmd.Cmd):
