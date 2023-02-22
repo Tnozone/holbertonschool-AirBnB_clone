@@ -12,3 +12,6 @@ class TestState(unittest.TestCase):
     def test_id(self):
         hello = State()
         self.assertEqual(str, type(hello.id))
+
+if __name__ == '__main__':
+    unittest.main()
