@@ -33,7 +33,8 @@ class HBNBCommand(cmd.Cmd):
     tab = ["BaseModel", "User", "State", "City", "Amenity", "Place", "Review"]
 
     def do_create(self, arg):
-        """Crée une nouvelle instance de BaseModel et l'enregistre dans le fichier JSON"""
+        """Crée une nouvelle instance de BaseModel
+           et l'enregistre dans le fichier JSON"""
 
         # Récupère la liste des mots dans la commande de création
         args = arg.split()
@@ -77,7 +78,9 @@ class HBNBCommand(cmd.Cmd):
         print(obj_all[key])
 
     def do_destroy(self, arg):
-        """On va suprimer les instance d'une class et enregister dans le fichier json"""
+        """On va suprimer les instance d'une class
+           et enregister dans le fichier json"""
+
         args = arg.split()
 
         if not arg:
@@ -104,8 +107,7 @@ class HBNBCommand(cmd.Cmd):
         models.storage.save()
 
     def do_all(self, arg):
-        """Prints all string representation of all instances based or not on the class name
-        Usage: all [Class Name] or all"""
+        """Prints all string representation of all instances"""
 
         args = arg.split()
         obj_all = models.storage.all()
@@ -114,15 +116,16 @@ class HBNBCommand(cmd.Cmd):
         if not len(args):
             print([str(obj_all[key]) for key in obj_all])
 
-        # Si un nom de classe est fourni, on affiche toutes les instances de cette classe.
+        # Si un nom de classe est fourni, on affiche toutes les instances.
         elif args[0] in self.tab:
-            print([str(obj_all[key]) for key in obj_all if key.startswith(args[0] + ".")])
+            print([str(obj_all[key])
+                   for key in obj_all if key.startswith(args[0] + ".")])
 
         else:
             print("** class doesn't exist **")
 
     def do_update(self, arg):
-        """met à jour une instance en fonction du nom et de l'identifiant"""
+        """met à jour une instance en fonction"""
 
         args = arg.split()
         obj_all = models.storage.all()
