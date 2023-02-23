@@ -15,7 +15,7 @@ import models
 class HBNBCommand(cmd.Cmd):
     """class HBNBCommand qui herite cmd.Cmd"""
 
-    prompt = "(hbnb) " 
+    prompt = "(hbnb)" 
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -100,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
 
         del obj_all[key]
         models.storage.save()
-         
+
     def do_update(self, arg):
         """met à jour une instance en fonction du nom et de l'identifiant
             en ajoutant ou en mettant à jour l'attribut""" 
