@@ -7,7 +7,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
-from models.user import User
+
 import sys
 import models
 
@@ -15,22 +15,7 @@ import models
 class HBNBCommand(cmd.Cmd):
     """class HBNBCommand qui herite cmd.Cmd"""
 
-    prompt = "(hbnb) "
-
-    list_class = ["BaseModel", "User"]
-
-    list_function = ['show' 'create', 'destroy', 'update', 'all']
-
-    def precmd(self, arg):
-        """parseur de commande"""
-        if '.' in arg and '(' in arg and ')' in arg:
-            my_class = arg.split('.')
-            my_func = my_class[1].split('(')
-            param = my_func[1].split(')')
-            if my_class[0] in HBNBCommand.list_class and \
-                my_func[0] in HBNBCommand.list_function:
-                    arg = my_func[0] + ' ' + my_class[0] + ' ' + param[0]
-        return arg     
+    prompt = "(hbnb) " 
 
     def do_quit(self, arg):
         """Quit command to exit the program"""
@@ -115,24 +100,6 @@ class HBNBCommand(cmd.Cmd):
 
         del obj_all[key]
         models.storage.save()
-
-    def do_all(self, arg):
-        """Prints all string representation of all instances based or not on the class name
-        Usage: all [Class Name] or all"""
-
-        args = arg.split()
-        obj_all = models.storage.all()
-
-        # Si aucun argument n'est fourni, on affiche toutes les instances.
-        if not len(args):
-            print([str(obj_all[key]) for key in obj_all])
-
-        # Si un nom de classe est fourni, on affiche toutes les instances de cette classe.
-        elif args[0] in self.tab:
-            print([str(obj_all[key]) for key in obj_all if key.startswith(args[0] + ".")])
-
-        else:
-            print("** class doesn't exist **")
          
     def do_update(self, arg):
         """met à jour une instance en fonction du nom et de l'identifiant
