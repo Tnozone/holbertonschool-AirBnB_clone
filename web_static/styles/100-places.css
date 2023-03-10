@@ -95,12 +95,32 @@
 	list-style: none;
 }
 
+.anemities li {
+	left: 15px;	
+}
+
 .reviews li h3 {
 	font-size: 14px;
 	text-align: left;
+	font-weight: bold;
 }
 
 .reviews li p {
 	font-size: 12px;
 	text-align: left;
+}
+
+li.tv {
+	background: url("../images/icon_tv.png") no-repeat;
+	background-position: left;
+}
+
+li.wifi {
+	background: url("../images/icon_wifi.png") no-repeat;
+	background-position: left;
+}
+
+li.pets {
+	background: url("../images/icon_pets.png") no-repeat;
+	background-position: left;
 }
