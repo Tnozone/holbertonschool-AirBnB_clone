@@ -17,11 +17,15 @@
 	margin: 20px;
 	border: solid 1px #FF5A5F;
 	border-radius: 4px;
+	position: relative;
+	z-index: -1;
 }
 
 .places article h2 {
 	font-size: 30px;
 	text-align: center;
+	margin: 0;
+	padding: 5px 0px 40px;
 }
 
 .price_by_night {
